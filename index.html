@@ -45,6 +45,34 @@
             opacity: 0.9;
         }
         
+        .nav {
+            background: white;
+            padding: 15px 30px;
+            margin: -16px 0 0 0;
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .nav a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
         .gantt-wrapper {
             overflow-x: auto;
             padding: 30px;
@@ -171,6 +199,11 @@
         <div class="header">
             <h1>Investudy Roadmap</h1>
             <p>Старт проекта: 3 сентября 2025</p>
+        </div>
+        
+        <div class="nav">
+            <a href="index.html" class="active">Roadmap</a>
+            <a href="report.html">Weekly Report</a>
         </div>
         
         <div class="gantt-wrapper">

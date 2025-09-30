@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investudy - Еженедельный отчет</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .period {
+            font-size: 18px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .nav {
+            background: white;
+            border-radius: 16px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .nav a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-card h3 {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .metric-subtitle {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .metric-record {
+            font-size: 14px;
+            color: #f5576c;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin: 20px 0 15px 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .status-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .status-card h4 {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .status-good {
+            color: #4caf50;
+        }
+        
+        .status-warning {
+            color: #ff9800;
+        }
+        
+        .status-critical {
+            color: #f44336;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+        }
+        
+        .downloads-breakdown {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 20px;
+        }
+        
+        .download-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .download-row:last-child {
+            border-bottom: none;
+        }
+        
+        .download-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .download-value {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Investudy Weekly Report</h1>
+            <div class="period">22.09 - 28.09.2025</div>
+        </div>
+        
+        <div class="nav">
+            <a href="index.html">Roadmap</a>
+            <a href="report.html" class="active">Weekly Report</a>
+        </div>
+        
+        <div class="section-title">👥 Активные пользователи</div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>MAU (Monthly Active Users)</h3>
+                <div class="metric-value">19 041</div>
+                <div class="metric-subtitle">Сентябрь 2025</div>
+                <div class="metric-record">🏆 Рекорд: 23 793 (Июль)</div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>WAU (Weekly Active Users)</h3>
+                <div class="metric-value">8 340</div>
+                <div class="metric-subtitle">22.09 - 28.09.2025</div>
+                <div class="metric-record">🏆 Рекорд: 13 293 (14.07-20.07)</div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>DAU (Daily Active Users)</h3>
+                <div class="metric-value">3 204</div>
+                <div class="metric-subtitle">26.09.2025</div>
+                <div class="metric-record">🏆 Рекорд: 5 286 (14.07.25)</div>
+            </div>
+        </div>
+        
+        <div class="section-title">📱 Скачивания</div>
+        <div class="downloads-breakdown">
+            <div class="download-row">
+                <div class="download-label">Всего скачиваний</div>
+                <div class="download-value">82 114</div>
+            </div>
+            <div class="download-row">
+                <div class="download-label">iOS</div>
+                <div class="download-value">70 245</div>
+            </div>
+            <div class="download-row">
+                <div class="download-label">Android</div>
+                <div class="download-value">12 703</div>
+            </div>
+        </div>
+        
+        <div class="section-title">💰 Финансы</div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Выручка</h3>
+                <div class="metric-value">470 050₸</div>
+                <div class="metric-subtitle">01.09 - 29.09.2025</div>
+                <div class="metric-record">🏆 Рекорд: 599 830₸ (Август)</div>
+            </div>
+        </div>
+        
+        <div class="section-title">🛡️ Стабильность приложения</div>
+        <div class="status-grid">
+            <div class="status-card">
+                <h4>iOS - Crash-free Users</h4>
+                <div class="status-value status-critical">7.03%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 7.03%; background: #f44336;"></div>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h4>iOS - Crash-free Sessions</h4>
+                <div class="status-value status-warning">32.95%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 32.95%; background: #ff9800;"></div>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h4>Android - Crash-free Users</h4>
+                <div class="status-value status-good">94.55%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 94.55%; background: #4caf50;"></div>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h4>Android - Crash-free Sessions</h4>
+                <div class="status-value status-good">98.07%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 98.07%; background: #4caf50;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">⚙️ Системные ресурсы</div>
+        <div class="status-grid">
+            <div class="status-card">
+                <h4>CPU Busy</h4>
+                <div class="status-value status-warning">25.7%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25.7%; background: #ff9800;"></div>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h4>System Load</h4>
+                <div class="status-value status-warning">23.0%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 23%; background: #ff9800;"></div>
+                </div>
+            </div>
+            
+            <div class="status-card">
+                <h4>RAM Used</h4>
+                <div class="status-value status-good">34.9%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 34.9%; background: #4caf50;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">🐛 Баги и поддержка</div>
+        <div class="status-grid">
+            <div class="status-card">
+                <h4>Активные баги</h4>
+                <div class="status-value status-good">2</div>
+            </div>
+            
+            <div class="status-card">
+                <h4>Исправленные баги</h4>
+                <div class="status-value status-good">2</div>
+            </div>
+            
+            <div class="status-card">
+                <h4>Обращений в поддержку</h4>
+                <div class="status-value">15</div>
+                <div class="metric-subtitle">22.09 - 28.09.2025</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
