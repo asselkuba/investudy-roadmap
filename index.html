@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investudy Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .gantt-wrapper {
+            overflow-x: auto;
+            padding: 30px;
+        }
+        
+        .gantt-chart {
+            min-width: 1200px;
+        }
+        
+        .timeline {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .month {
+            flex: 1;
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        
+        .task {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .task-name {
+            width: 300px;
+            padding-right: 20px;
+            font-size: 13px;
+            color: #555;
+            flex-shrink: 0;
+        }
+        
+        .task-timeline {
+            flex: 1;
+            position: relative;
+            height: 36px;
+        }
+        
+        .task-bar {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .task-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .task-bar.milestone {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+        }
+        
+        .task-bar.milestone:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.task {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .legend-color.milestone {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Investudy Roadmap</h1>
+            <p>Старт проекта: 3 сентября 2025</p>
+        </div>
+        
+        <div class="gantt-wrapper">
+            <div class="gantt-chart">
+                <div class="timeline" id="timeline"></div>
+                
+                <div class="section">
+                    <div class="section-title">Авторизация и стабильность</div>
+                    <div class="task">
+                        <div class="task-name">Финальные исправления авторизации (RU/EN/KZ SMS, disclaimers, refresh)</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-09-03" data-end="2025-09-30">03.09 - 30.09</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">QA регрессия (вход/регистрация/восстановление)</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-09-20" data-end="2025-09-30">20.09 - 30.09</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Релиз авторизации</div>
+                        <div class="task-timeline">
+                            <div class="task-bar milestone" data-start="2025-09-30" data-end="2025-10-01">30.09</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Миграция iOS (релиз 2025-10-15)</div>
+                    <div class="task">
+                        <div class="task-name">Финальная регрессия iOS</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-09-03" data-end="2025-10-01">03.09 - 01.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">TestFlight RC и мониторинг крашей/ANR</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-02" data-end="2025-10-06">02.10 - 06.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Отправка в App Store и ревью</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-07" data-end="2025-10-10">07.10 - 10.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Раскатка 25%→50%→100%</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-11" data-end="2025-10-15">11.10 - 15.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Релиз iOS</div>
+                        <div class="task-timeline">
+                            <div class="task-bar milestone" data-start="2025-10-15" data-end="2025-10-16">15.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Пострелизная стабилизация (краши <0.5%)</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-16" data-end="2025-11-15">16.10 - 15.11</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Премиум 990₸</div>
+                    <div class="task">
+                        <div class="task-name">UX платной стены + текст + локализация</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-01" data-end="2025-10-10">01.10 - 10.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Интеграция платежей (Kaspi/Halyk/Stripe) + вебхуки</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-10" data-end="2025-10-20">10.10 - 20.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Feature flags и ограничения (контент/аналитика/посты)</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-15" data-end="2025-10-22">15.10 - 22.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Премиум контент (платные посты, превью статистики)</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-18" data-end="2025-10-25">18.10 - 25.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">События Amplitude + A/B цены/креативы</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-22" data-end="2025-11-05">22.10 - 05.11</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Запуск премиума</div>
+                        <div class="task-timeline">
+                            <div class="task-bar milestone" data-start="2025-11-05" data-end="2025-11-06">05.11</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Паритет iOS/Android</div>
+                    <div class="task">
+                        <div class="task-name">Аудит паритета (по SCRUM-394)</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-16" data-end="2025-10-22">16.10 - 22.10</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Перенос ключевых iOS функций на Android</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-10-23" data-end="2025-11-12">23.10 - 12.11</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Выравнивание UI/UX + производительность</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-11-13" data-end="2025-11-30">13.11 - 30.11</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Паритет достигнут</div>
+                        <div class="task-timeline">
+                            <div class="task-bar milestone" data-start="2025-11-30" data-end="2025-12-01">30.11</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Парсинг PDF (SCRUM-83)</div>
+                    <div class="task">
+                        <div class="task-name">MVP: загрузка ≤10МБ, базовый парсинг, простые AI советы</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2025-11-25" data-end="2025-12-23">25.11 - 23.12</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Расширенное: авто-категоризация, сравнение периодов, редактирование</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2026-01-05" data-end="2026-02-09">05.01 - 09.02</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Продвинутое: прогнозы, персонализация, геймификация, экспорт</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2026-02-10" data-end="2026-03-25">10.02 - 25.03</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Полный AI парсинг готов</div>
+                        <div class="task-timeline">
+                            <div class="task-bar milestone" data-start="2026-03-25" data-end="2026-03-26">25.03</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">iClub (Социальная платформа)</div>
+                    <div class="task">
+                        <div class="task-name">Стримы/лайв + базовая структура</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2026-01-21" data-end="2026-03-01">21.01 - 01.03</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Лайки/комментарии/шеринг + рейтинги</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2026-03-02" data-end="2026-04-15">02.03 - 15.04</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">Расширение: календарь событий, аналитика экспертов, пуш механики</div>
+                        <div class="task-timeline">
+                            <div class="task-bar" data-start="2026-04-16" data-end="2026-07-04">16.04 - 04.07</div>
+                        </div>
+                    </div>
+                    <div class="task">
+                        <div class="task-name">iClub полная социальная платформа</div>
+                        <div class="task-timeline">
+                            <div class="task-bar milestone" data-start="2026-07-04" data-end="2026-07-05">04.07</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color task"></div>
+                <span>Задача</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color milestone"></div>
+                <span>Майлстоун</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const startDate = new Date('2025-09-03');
+        const endDate = new Date('2026-07-05');
+        
+        function generateTimeline() {
+            const timeline = document.getElementById('timeline');
+            const months = [];
+            let current = new Date(startDate);
+            
+            while (current <= endDate) {
+                const monthYear = current.toLocaleDateString('ru-RU', { month: 'short', year: 'numeric' });
+                if (!months.includes(monthYear)) {
+                    months.push(monthYear);
+                }
+                current.setMonth(current.getMonth() + 1);
+            }
+            
+            months.forEach(month => {
+                const div = document.createElement('div');
+                div.className = 'month';
+                div.textContent = month;
+                timeline.appendChild(div);
+            });
+        }
+        
+        function positionTasks() {
+            const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            const tasks = document.querySelectorAll('.task-bar');
+            
+            tasks.forEach(task => {
+                const taskStart = new Date(task.dataset.start);
+                const taskEnd = new Date(task.dataset.end);
+                const startOffset = Math.ceil((taskStart - startDate) / (1000 * 60 * 60 * 24));
+                const duration = Math.ceil((taskEnd - taskStart) / (1000 * 60 * 60 * 24));
+                
+                const leftPercent = (startOffset / totalDays) * 100;
+                const widthPercent = (duration / totalDays) * 100;
+                
+                task.style.left = leftPercent + '%';
+                task.style.width = widthPercent + '%';
+            });
+        }
+        
+        generateTimeline();
+        positionTasks();
+    </script>
+</body>
+</html>
