@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1400, initial-scale=1.0, minimum-scale=1.0">
     <title>Investudy - Product Roadmap 2025-2026</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -381,12 +381,10 @@
             }
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 { font-size: 28px; }
-            .task-group-title { font-size: 14px; }
-            .task-name { font-size: 13px; }
-            .timeline-months { font-size: 11px; }
+        /* Prevent responsive behavior - force horizontal scroll on mobile */
+        body {
+            min-width: 1400px;
+            overflow-x: auto;
         }
     </style>
 </head>
