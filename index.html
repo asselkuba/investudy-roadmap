@@ -752,10 +752,14 @@
     </div>
     
     <script>
-        // Add hover tooltips
+        // Add hover tooltips with improved behavior
+        let tooltipTimeout;
+        const tooltip = document.getElementById('tooltip');
+        
         document.querySelectorAll('.bar').forEach(bar => {
             bar.addEventListener('mouseenter', function(e) {
-                const tooltip = document.getElementById('tooltip');
+                clearTimeout(tooltipTimeout);
+                
                 const rect = this.getBoundingClientRect();
                 
                 tooltip.querySelector('.tooltip-title').textContent = 
@@ -772,9 +776,20 @@
                 tooltip.classList.add('active');
             });
             
-            bar.addEventListener('mouseleave', function() {
-                document.getElementById('tooltip').classList.remove('active');
+            bar.addEventListener('mouseleave', function(e) {
+                tooltipTimeout = setTimeout(() => {
+                    tooltip.classList.remove('active');
+                }, 200);
             });
+        });
+        
+        // Keep tooltip visible when hovering over it
+        tooltip.addEventListener('mouseenter', function() {
+            clearTimeout(tooltipTimeout);
+        });
+        
+        tooltip.addEventListener('mouseleave', function() {
+            tooltip.classList.remove('active');
         });
     </script>
 </body>
